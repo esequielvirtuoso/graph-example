@@ -1,0 +1,101 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+type Field {
+  ID: ID!      
+	DataPacks: [DataPacks]
+	Lineage: Lineage     
+}
+
+type DataPacks {
+	Name: String
+	DataOwner: String
+}
+
+type Lineage {
+	Source: LineageSource       
+	Treatments: [LineageTreatments]
+	Destination: [LineageDestination]  
+}
+
+type LineageSource {
+	Subject: String
+	FieldType: String
+	URL: String
+}
+
+type LineageTreatments {
+	StromTroopersFunction: String
+}
+
+type LineageDestination {
+	FieldType: String               
+	EntitiesSubjects: [String]
+	DomainsSubjects: [String]             
+	Sections: [DestinationSections]
+	Outputs: [String]             
+	Apps: [String]             
+	Clients: [Int]               
+}
+
+type DestinationSections {
+	Name: String
+	FieldLabel: String
+	VariableType: String
+}
+
+type Query {
+  field(ID: String!): Field!
+  fields: [Field!]!
+}
+
+# INPUT ---------------------------------------------
+input InputField {
+  ID: ID!      
+	DataPacks: InputDataPacks
+	Lineage: InputLineage   
+}
+
+input InputDataPacks {
+  Name: String
+  DataOwner: String
+}
+
+input InputLineage {
+	Source: InputLineageSource       
+	Treatments: [InputLineageTreatments]
+	Destination: [InputLineageDestination]  
+}
+
+input InputLineageSource {
+	Subject: String
+	FieldType: String
+	URL: String
+}
+
+input InputLineageTreatments {
+	StromTroopersFunction: String
+}
+
+input InputLineageDestination {
+	FieldType: String               
+	EntitiesSubjects: [String]
+	DomainsSubjects: [String]             
+	Sections: [InputDestinationSections]
+	Outputs: [String]             
+	Apps: [String]             
+	Clients: [Int]               
+}
+
+input InputDestinationSections {
+	Name: String
+	FieldLabel: String
+	VariableType: String
+}
+
+# -------------------------------------------------------
+
+type Mutation {
+  createField(input: InputField!): Field!
+}
